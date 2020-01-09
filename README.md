@@ -69,3 +69,6 @@ The command should open a new window in your browser, where you can start runnin
 Python scripts.
 
 Happy hacking. 
+
+TODO: Describe that students who don't want to use Conda should install the
+requirements using `pip`.
