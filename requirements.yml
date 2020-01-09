@@ -1,0 +1,8 @@
+name: dm20
+dependencies:
+    - python=3.7
+    - numpy
+    - scikit-learn
+    - matplotlib
+    - tqdm
+    - jupyter
