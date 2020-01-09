@@ -42,7 +42,7 @@ an environment, where we will install the necessary packages for this course.
 
 _Navigate to the project directory_:
 ```bash
-> cd /path/to/db20_exercises
+> cd /path/to/dm20_exercises
 ```
 
 _Create and activate environment:_  
