@@ -72,3 +72,6 @@ Happy hacking.
 
 TODO: Describe that students who don't want to use Conda should install the
 requirements using `pip`.
+
+### Forking the repo
+TODO: describe the workflow of forking repo and "pulling in the new exercises" every week.
