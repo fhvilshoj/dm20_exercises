@@ -4,6 +4,7 @@ import os
 # Prepare label dictionaries to translate between strings in text files and ints in numpy.
 label_to_index = { s: i for i, s in enumerate(["Iris-versicolor", "Iris-setosa", "Iris-virginica"]) }
 index_to_label = { i: s for s, i in label_to_index.items() }
+index_to_feature = ["Petal length", "Petal width", "Sepal length", "Sepal width"]
 
 def load_iris(onehot=True):
 	data_path = os.path.dirname(os.path.realpath(__file__)) + '/data/iris.txt'
