@@ -57,6 +57,9 @@ notebook for this course, make sure to activate the environment (as in the last
 line of coda above).  You know that your environment is active, if your active
 line in the terminal is prefixed with `(dm20)`.
 
+By the way, a pretty fine cheatsheet can be found 
+[here](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf).
+
 **Starting JupyterNotebook:**  
 To start a jupyter notebook, navigate to the root of this repo and run the
 following command from the command line:
@@ -70,8 +73,3 @@ Python scripts.
 
 Happy hacking. 
 
-TODO: Describe that students who don't want to use Conda should install the
-requirements using `pip`.
-
-### Forking the repo
-TODO: describe the workflow of forking repo and "pulling in the new exercises" every week.
