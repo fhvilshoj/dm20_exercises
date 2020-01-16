@@ -6,8 +6,8 @@ label_to_index = { s: i for i, s in enumerate(["Iris-versicolor", "Iris-setosa",
 index_to_label = { i: s for s, i in label_to_index.items() }
 index_to_feature = ["Petal length", "Petal width", "Sepal length", "Sepal width"]
 
-def load_iris(onehot=True):
-	data_path = os.path.dirname(os.path.realpath(__file__)) + '/data/iris.txt'
+def _load_iris(filename, onehot):
+	data_path = os.path.dirname(os.path.realpath(__file__)) + '/data/' + filename
 	
 	X, y = [], []
 	with open(data_path, 'r') as f:
@@ -16,9 +16,11 @@ def load_iris(onehot=True):
 
 			# Example line:
 			# 6.6,2.9,4.6,1.3,"Iris-versicolor"
+			l = l.replace('"', '') # Remove "
 
 			x_ = [float(s) for s in l.split(',')[:-1]]
-			y_ = label_to_index[l.split(',')[-1].strip()[1:-1]]
+			y_ = label_to_index[l.split(',')[-1].strip()]
+
 			X.append(x_)
 			y.append(y_)
 
@@ -33,6 +35,14 @@ def load_iris(onehot=True):
 
 	return np.array(X), y_onehot
 
+def load_iris(onehot=True):
+	"""
+		Loads full iris dataset
+	"""
+	return _load_iris('iris.txt', onehot)
+
+def load_iris_PC(onehot=True):
+	return _load_iris('iris-PC.txt', onehot)
 
 
 if __name__ == "__main__": 
@@ -40,8 +50,6 @@ if __name__ == "__main__":
 	# (dm20) > python load_data.py 
 	# to see this execution. 
 
-	X, y = load_iris()
-	
-	print(X.shape, y.shape)
-	print(X[:5])
-	print(y[:5])
+	for n, fn in [('iris.txt', load_iris), ('iris-PC.txt', load_iris_PC)]:
+		X, y = fn()
+		print("%-15s shapes: " % n, X.shape, y.shape)
