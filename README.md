@@ -18,7 +18,7 @@ website, there are links to lecture videos, which might have value for you.
 Additional material for the course can be found on Black Board.
 
 ## Structure of the repository
-Every week, there will be a Jupyter Notebook with exercises. These can be found
+Every week, there will be a Jupyter Notebook with exercises. The notebooks can be found
 in the [exercises directory](./exercises). 
 
 The [utilities directory](./utilities) includes the data that we will be
@@ -29,7 +29,7 @@ working with along with convenience methods for the data.
 _note_: This course is a Python course, so in case you are not familiar with
 Python, you might want to familiarize your self with Python and
 JupyterNotebooks. Also, one library, that we are going to be using a lot is
-`numpy`, which is a library that allows us to work with vectors and matrices.
+`numpy`, which llows us to work with vectors and matrices.
 
 ### Setup
 If you don't have Python installed already, we recommend you to install 
@@ -60,16 +60,21 @@ line in the terminal is prefixed with `(dm20)`.
 By the way, a pretty fine cheatsheet can be found 
 [here](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf).
 
-**Starting JupyterNotebook:**  
-To start a jupyter notebook, navigate to the root of this repo and run the
+**Starting Jupyter Lab:**  
+To edit Jupyter Notebooks, we need to start Jupyter lab. 
+Navigate to the root of this repo and run the
 following command from the command line:
 
 ```bash
-(dm20) > jupyter notebook
+(dm20) > jupyter lab
 ```
 
 The command should open a new window in your browser, where you can start running
 Python scripts.
 
 Happy hacking. 
+
+#### For Vim enthusiats
+If you want vim-bindings in Jupyter Lab, then you can go to the extensions panel (on the left in
+Jupyter Lab) and search for the library `jupyterlab_vim`.
 
