@@ -30,13 +30,15 @@ class GMM:
 		mvn = multivariate_normal(mean=mu, cov=sigma)
 		return mvn.pdf(X)
 
-
+            
 	def initialize_parameters(self, X):
 		"""
 			This function should utilize information from the data to initialize
 			the parameters of the model.
 			In particular, it should update self.mu and self.Sigma.
 
+            This function corresponds to line 2-4 in Algorithm 13.3 in [Zaki, p. 349]
+            
 			Args:
     			X (matrix, [n, d]): Data to be used for initialization.
 
@@ -48,22 +50,14 @@ class GMM:
 		"""
 		raise NotImplementedError() 
 
-
-	def prior(self): 
-		"""
-			Returns the prior probabilities p(Y).
-
-			Returns:
-				Vector of size		[K]
-		"""
-		raise NotImplementedError()
-
-
+        
 	def posterior(self, X):
 		"""
 			The E-step of the EM algorithm. 
 			Returns the posterior probability p(y|X)
 
+            This function corresponds to line 8 in Algorithm 13.3 in [Zaki, p. 349]
+            
 			Args:
 				X (matrix, [n,  d]): Data to compute posterior for.
 
@@ -78,6 +72,8 @@ class GMM:
 			Update the estimates of mu, Sigma, and pi, given the current
 			posterior probabilities.
 
+            This function corresponds to line 10-12 in Algorithm 13.3 and Eqn. (13.11-13) in [Zaki, p. 349].
+            
 			Args:
     			X (matrix, [n, d]): Data to be used for initialization.
     			P (matrix, [n, K]): The posterior probabilities for the n samples.

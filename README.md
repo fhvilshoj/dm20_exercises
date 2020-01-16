@@ -1,7 +1,8 @@
 # Exercises, Data Mining at Aarhus University
 The [Data Mining course](https://kursuskatalog.au.dk/da/course/95439/Data-Mining) 
 at Aarhus University is primarily based on the 
-[Zaki and Meira book](http://www.dataminingbook.info/pmwiki.php/Main/BookDownload):
+[Zaki and Meira book](http://www.dataminingbook.info/pmwiki.php/Main/BookDownload)
+refered to as [Zaki] throughout this repository:
 
 > Zaki, M.J., Meira Jr, W. and Meira, W., 2014. 
 > Data mining and analysis: fundamental concepts 
