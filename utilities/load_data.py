@@ -6,7 +6,7 @@ label_to_index = { s: i for i, s in enumerate(["Iris-versicolor", "Iris-setosa",
 index_to_label = { i: s for s, i in label_to_index.items() }
 index_to_feature = ["Petal length", "Petal width", "Sepal length", "Sepal width"]
 
-def _load_iris(filename, onehot):
+def _load_data(filename, onehot, lab_to_idx=label_to_index):
 	data_path = os.path.dirname(os.path.realpath(__file__)) + '/data/' + filename
 	
 	X, y = [], []
@@ -19,13 +19,13 @@ def _load_iris(filename, onehot):
 			l = l.replace('"', '') # Remove "
 
 			x_ = [float(s) for s in l.split(',')[:-1]]
-			y_ = label_to_index[l.split(',')[-1].strip()]
+			y_ = lab_to_idx[l.split(',')[-1].strip()]
 
 			X.append(x_)
 			y.append(y_)
 
 	n = len(y)
-	d = len(label_to_index)
+	d = len(lab_to_idx)
 
 	y = np.array(y)
 	if onehot:
@@ -39,17 +39,24 @@ def load_iris(onehot=True):
 	"""
 		Loads full iris dataset
 	"""
-	return _load_iris('iris.txt', onehot)
+	return _load_data('iris.txt', onehot)
 
 def load_iris_PC(onehot=True):
-	return _load_iris('iris-PC.txt', onehot)
+	return _load_data('iris-PC.txt', onehot)
+
+def load_t7():
+	return _load_data('t7-4k.txt', onehot=True, lab_to_idx={"0": 0})
 
 
 if __name__ == "__main__": 
 	# Example usage. Just run
 	# (dm20) > python load_data.py 
 	# to see this execution. 
-
-	for n, fn in [('iris.txt', load_iris), ('iris-PC.txt', load_iris_PC)]:
+	datasets = [
+			('iris.txt', load_iris), 
+			('iris-PC.txt', load_iris_PC),
+			('t7-4k.txt', load_t7),
+		]
+	for n, fn in datasets:
 		X, y = fn()
 		print("%-15s shapes: " % n, X.shape, y.shape)
