@@ -1,5 +1,7 @@
 import numpy as np
 import os
+import urllib.request
+import gzip
 
 __all__ = [
         'load_iris',
@@ -86,6 +88,40 @@ def load_synthetic_data(index=0, dims=10):
 
     return np.array(data), np.array(labels)
 
+def load_mnist():
+    base_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + '/../utilities/data/') + '/'
+    X_train_file = 'http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz'
+    y_train_file = 'http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz'
+    X_test_file  = 'http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz'
+    y_test_file  = 'http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz'
+
+    names = ['X_train.gz', 'y_train.gz', 'X_test.gz', 'y_test.gz']
+    files = [X_train_file, y_train_file, X_test_file, y_test_file]
+    sizes = [60000,        60000,        10000,       10000]
+
+    out = []
+    for (url, fn, size) in zip(files, names, sizes):
+        file_path = base_dir + fn
+
+        if not os.path.exists(file_path):
+            print("Downloading %s to %s" % (url, file_path))
+            urllib.request.urlretrieve(url, file_path)
+
+        is_img = 'X' in fn
+        image_size = 28
+
+        with gzip.open(file_path,'r') as f:
+            f.read(16) if is_img else f.read(8)
+            read_size = size * 28**2 if is_img else size
+
+            buf = f.read(read_size)
+            data = np.frombuffer(buf, dtype=np.uint8)
+            if is_img: 
+                data = data.astype(np.float32)
+                data = data.reshape(size, image_size, image_size)
+            out.append(data)
+    
+    return tuple(out)
 
 if __name__ == "__main__": 
     # Example usage. Just run
@@ -95,7 +131,9 @@ if __name__ == "__main__":
             ('iris.txt', load_iris), 
             ('iris-PC.txt', load_iris_PC),
             ('t7-4k.txt', load_t7),
+            ('mnist', load_mnist),
         ]
     for n, fn in datasets:
-        X, y = fn()
-        print("%-15s shapes: " % n, X.shape, y.shape)
+        out = fn()
+        print("%-15s shapes: " % n, [o.shape for o in out])
+
