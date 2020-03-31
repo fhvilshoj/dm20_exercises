@@ -123,6 +123,20 @@ def load_mnist():
     
     return tuple(out)
 
+def load_market_basket():
+    url = "http://fimi.uantwerpen.be/data/retail.dat"
+    name = "retail.dat"
+    base_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + '/../utilities/data/') + '/'
+    
+    file_path = base_dir + name
+    if not os.path.exists(file_path):
+        print("Downloading %s to %s" % (url, file_path))
+        urllib.request.urlretrieve(url, file_path)
+        
+    with open(file_path, 'r') as f:
+        lines = [[int(x) for x in l.strip().split(" ")] for l in f]    
+    return lines
+
 if __name__ == "__main__": 
     # Example usage. Just run
     # (dm20) > python load_data.py 
