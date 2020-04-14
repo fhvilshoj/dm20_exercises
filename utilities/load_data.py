@@ -2,6 +2,8 @@ import numpy as np
 import os
 import urllib.request
 import gzip
+import zipfile
+import pickle
 
 __all__ = [
         'load_iris',
@@ -136,6 +138,36 @@ def load_market_basket():
     with open(file_path, 'r') as f:
         lines = [[int(x) for x in l.strip().split(" ")] for l in f]    
     return lines
+
+def load_dblp_citations():
+    url = "http://nrvis.com/download/data/cit/cit-DBLP.zip"
+    name = url.split('/')[-1]
+    base_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + '/../utilities/data/') + '/'
+    
+    file_path = base_dir + name
+    edges_file = 'cit-DBLP.edges'
+    
+    if not os.path.exists(file_path):
+        print("Downloading %s to %s" % (url, file_path))
+        urllib.request.urlretrieve(url, file_path)
+    
+    if not os.path.exists(base_dir + edges_file):
+        with zipfile.ZipFile(file_path, 'r') as z:
+            print("Extracting citation file `%s` to %s" % (edges_file, base_dir))
+            z.extract(edges_file, path=base_dir)
+    
+    edges = []
+    with open(base_dir + edges_file, 'r') as f:
+        f.readline()
+        f.readline()
+        
+        edges = [tuple(map(int, s.strip().split(' '))) for s in f]
+        
+    # Load precomputed node locations for nodes
+    with open(base_dir + 'cit-DBLP-pos.pkl', 'rb') as f:
+        pos = pickle.load(f)
+    return edges, pos
+    
 
 if __name__ == "__main__": 
     # Example usage. Just run
