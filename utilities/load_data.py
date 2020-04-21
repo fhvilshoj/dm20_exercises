@@ -168,6 +168,37 @@ def load_dblp_citations():
         pos = pickle.load(f)
     return edges, pos
     
+def load_city_tour():
+    base_dir = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + '/../utilities/data/') + '/'
+    file_name = base_dir + 'city_distances.txt'
+    print(file_name)
+    with open(file_name, 'r') as f:
+        cities = [l.strip().split(',') for l in f if ('--' not in l) and ('#' not in l)]
+    
+    n = len(cities)
+    distances = np.zeros((n, n), dtype=np.float)
+    prev = 0.
+    
+    for i, (city, distance) in enumerate(cities):
+        distance = int(distance)
+        if i == 0: continue
+        
+        if distance < prev: prev = 0.
+        
+        dist = distance - prev
+        distances[i-1, i] = dist
+        
+        prev = distance
+     
+    # Build rest of table
+    for i in range(0, n):
+        for j in range(i+2, n):
+            distances[i, j] = distances[i, j-1] + distances[j-1, j]
+    distances = distances + distances.T
+    
+    cities = list(map(lambda x: x[0], cities))
+    return cities, distances
+    
 
 if __name__ == "__main__": 
     # Example usage. Just run
