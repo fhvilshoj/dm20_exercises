@@ -36,9 +36,8 @@ Vordingborg (Denmark), 389
 Køge (Denmark), 449
 Kastrup (Denmark), 494
 Malmø (Sweden), 529
-# Lund (Sweden), 547
 --
-Löddeköpinge (Sweden), 16
+Löddeköpinge (Sweden), 34
 Helsingborg (Sweden), 57
 Ljungby (Sweden), 183
 Värnamo (Sweden), 226
